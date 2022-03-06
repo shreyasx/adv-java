@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <title>Be Careful.</title>
+</head>
+
+<body>
+  <h3>Termwork 1</h3>
+  <pre>
+    import java.io.*; 
+    import static java.lang.System.exit; 
+    import java.util.Scanner; 
+    public class tw1{ 
+     public static void main(String[] args) 
+     { 
+     while(true){ 
+     System.out.println("1.Transfer the content of the file to another file - one byte at a time\n2.Transfer the 
+    content of the source file to destination file by byte input/output stream\n3.Display the content of the 
+    destination file\n4.Exit \n"); 
+     Scanner s = new Scanner(System.in); 
+     File obj1 = new File("C:\\Users\\Lab8\\Desktop\\input.txt"); 
+     File obj2 = new File("C:\\Users\\Lab8\\Desktop\\output.txt"); 
+     System.out.println("Enter your choice :"); 
+     int choice = s.nextInt(); 
+     switch(choice) 
+     { 
+     case 1:try{ 
+     FileInputStream fin = new FileInputStream(obj1); 
+     FileOutputStream fout = new FileOutputStream(obj2); 
+     int i = fin.read(); 
+     while(i!=-1) 
+     { 
+     fout.write(i); 
+     i = fin.read(); 
+     } 
+     System.out.println("Copied contents to another file."); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 2:try{ 
+     FileInputStream fin = new FileInputStream(obj1); 
+     FileOutputStream fout = new FileOutputStream(obj2); 
+     byte []buff = new byte[(int)obj1.length()]; 
+     fin.read(buff); 
+     ByteArrayInputStream bin = new ByteArrayInputStream(buff); 
+     ByteArrayOutputStream bout = new ByteArrayOutputStream(); 
+     int i = bin.read(); 
+     while(i!=-1) 
+     { 
+     bout.write(i); 
+     i=bin.read(); 
+     } 
+     bout.writeTo(fout); 
+     fin.close(); 
+     fout.close(); 
+     bin.close(); 
+     bout.flush(); 
+     System.out.println(“Contents transferred”) 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 3:try{ 
+     FileInputStream fin = new FileInputStream(obj2); 
+     byte []buff = new byte[fin.availaable()]; 
+     fin.read(buff); 
+     String data = new String(buff); 
+     System.out.println(data); 
+     System.out.println("Successfully Displayed"); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 4:System.exit(0); 
+     default: System.out.println(“Invalid Choice”); 
+     } 
+     } 
+     } 
+    }     
+  </pre>
+
+  <h3>Termwork 2</h3>
+  <pre>
+    import java.io.*; 
+    import java.util.*; 
+    public class tw2 { 
+     static void createArray(ArrayList ai,int in) 
+     { 
+     Scanner s = new Scanner(System.in); 
+     System.out.println("Enter element to be added to integer array list : "); 
+     int ele = s.nextInt(); 
+     ai.add(ele); 
+     System.out.println("The integer array is : "+ ai); 
+     System.out.println("Its size is : "+ai.size()); 
+     } 
+     static void createArray(int in,ArrayList fi){ 
+     Scanner s = new Scanner(System.in); 
+     System.out.println("Enter element to be added to float array list : "); 
+     float ele = s.nextInt(); 
+     fi.add(ele); 
+     System.out.println("The float array is : "+ fi); 
+     System.out.println("Its size is : "+fi.size()); 
+     } 
+     static void removeArray(ArrayList ai,int ind) 
+     { 
+     if(!ai.isEmpty()){ 
+     if(ind>=0 && ind&lt;ai.size()) 
+     { 
+     ai.remove(ind); 
+     System.out.println("Integer array now is : "+ai); 
+     } 
+     else 
+     { 
+     System.out.println("Enter valid index\n"); 
+     } 
+     } 
+     else 
+     System.out.println("ArrayList is empty"); 
+     } 
+     static void removeArray(int ind, ArrayList fi) 
+     { 
+     if(!fi.isEmpty()){ 
+     if(ind>=0 && ind&lt;fi.size()) 
+     { 
+     fi.remove(ind); 
+     System.out.println("Float array now is : "+fi); 
+     } 
+     else 
+     { 
+     System.out.println("Enter valid index\n"); 
+     } 
+     } 
+     else 
+     System.out.println("ArrayList is empty"); 
+     } 
+     static void linearSearch(ArrayList ai,int iele) 
+     { 
+     for(int i=0;i&lt;ai.size();i++){ 
+     if((int)ai.get(i)==iele){ 
+     System.out.println(“Element found at index: ”+i); 
+     return; 
+     } 
+     } 
+     System.out.println(“Element not found.”); 
+     } 
+     static void linearSearch(int fele. ArrayList fi) 
+     { 
+     for(int i=0;i&lt;fi.size();i++){ 
+     if((float)fi.get(i)==fele){ 
+     System.out.println(“Element found at index: ”+i); 
+     return; 
+     } 
+     } 
+     System.out.println(“Element not found.”); 
+     } 
+     public static void main(String[] args) 
+     { 
+     int choice,in,fno; 
+     Scanner s = new Scanner(System.in); 
+     ArrayList&lt;Float> fi; 
+     System.out.println("How many elements in integer arraylist:"); 
+     in = s.nextInt(); 
+     System.out.println("How many elements in float arraylist:"); 
+     fno = s.nextInt(); 
+     ArrayList&lt;Integer> ai = new ArrayList<>(in); 
+     ArrayList&lt;Float> fi = new ArrayList<>(fno); 
+     while(true){ 
+     System.out.println("\n1.To create integer array list/n" 
+     + "2.To remove an element from integer array list\n" 
+     + "3.To search in integer array list\n" 
+     + “4.To create float array list/n" 
+     + "5.To remove an element from float array list\n" 
+     + "6.To search in float array list\n” 
+     + “7.Exit”); 
+     System.out.print("Enter your choice : "); 
+     choice = s.nextInt(); 
+     switch(choice){ 
+     case 1: 
+     createArray(ai,in); 
+     break; 
+     case 2: 
+     System.out.print("Enter index of the element to be removed : "); 
+     int ind = s.nextInt(); 
+     removeArray(ai,ind); 
+     break; 
+     case 3: 
+     System.out.print("Enter the element to be searched : "); 
+     int iele = s.nextInt(); 
+     linearSearch(ai,iele); 
+     break; 
+     case 4: 
+     createArray(fno,fi); 
+     break; 
+     case 5: 
+     System.out.print("Enter index of the element to be removed : "); 
+     int ind = s.nextInt(); 
+     removeArray(ind,fi); 
+     break; 
+     case 6: 
+     System.out.print("Enter the element to be searched : "); 
+     float fele = s.nextFloat(); 
+     linearSearch(fele,fi); 
+     break; 
+     case 7: System.exit(0); 
+     default: System.out.println(“Invalid Choice.”); 
+     } 
+     } 
+     } 
+    }     
+  </pre>
+
+  <h3>Termwork 3</h3>
+  <pre>
+    import java.io.*; 
+    import static java.lang.System.exit; 
+    import java.util.Scanner; 
+    public class tw3 { 
+     public static void main(String []args) 
+     { 
+     Scanner s = new Scanner(System.in); 
+     String src_file = "C:\\Users\\ \\Desktop\\"; 
+     String des_file = "C:\\Users\\ \\Desktop\\"; 
+     String fname = new String(); 
+     File f; 
+     boolean flag=true; 
+     
+     while(flag){ 
+     System.out.println("1.Enter the source and destination file names\n" 
+     + "2.Enter text to be written to the source file\n" 
+     + "3.Write every alternate byte from the source to the destination file\n" 
+     + "4.Compare the properties of the files\n" 
+     + "5.Exit"); 
+     System.out.print("Enter your choice: "); 
+     int choice = s.nextInt(); 
+     
+    switch(choice){ 
+     case 1:try 
+     { 
+     System.out.print("Enter the source file name : "); 
+     fname = s.nextLine();// to consume the new line character 
+     fname = s.nextLine(); 
+     src_file = src_file + fname; 
+     System.out.println("Enter the Destination file name : "); 
+     fname = s.nextLine(); 
+     des_file = des_file+fname; 
+     f = new File(src_file); 
+     if(f.createNewFile()) 
+     System.out.println("New file created\n"); 
+     else 
+     System.out.println("source file already exists\n"); 
+     //Destination file creation 
+     f1 = new File(des_file); 
+     if(f1.createNewFile()) 
+     System.out.println("destination file created\n"); 
+     else 
+     System.out.println("File already exists\n"); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 2:try 
+     { 
+     String data = new String(); 
+     System.out.println("Enter the text to be written to the source file : "); 
+     read = s.nextLine(); 
+     read = s.nextLine(); 
+     FileOutputStream fout = new FileOutputStream(src_file); 
+     byte[] buff = read.getBytes(); 
+     fout.write(read); 
+     fout.close(); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 3:try 
+     { 
+     InputStream fin = new FileInputStream(src_file); 
+     OutputStream fout = new FileOutputStream(des_file); 
+     int i = fin.read(); 
+     while(i!=-1) 
+     { 
+     fin.read(); 
+     fout.write(i); 
+     i=fin.read(); 
+     } 
+     fout.close(); 
+     System.out.println(“”Data Copied!”); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 4:try 
+     { 
+     File fobj = new File(src_file); 
+     System.out.println("Properties of the source file :\n"); 
+     System.out.println("File name : " + fobj.getName()); 
+     System.out.println("is Writable : " + fobj.canWrite()); 
+     System.out.println("is readable : " + fobj.canRead()); 
+     System.out.println("is hidden : " + fobj.isHidden()); 
+     System.out.println("Path of the file : "+fobj.getAbsolutePath()); 
+     System.out.println("Length of the file is : "+fobj.length()); 
+     fobj = new File(des_file); 
+     System.out.println("Properties of the Destination file :\n"); 
+     System.out.println("File name : " + fob.getName()); 
+     System.out.println("is Writable : " + fobj.canWrite()); 
+     System.out.println("is readable : " + fobj.canRead()); 
+     System.out.println("is hidden : " + fobj.isHidden()); 
+     System.out.println("Path of the file : "+fobj.getAbsolutePath()); 
+     System.out.println("Length of the file is : "+fobj.length()); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     default: System.out.println(“Invalid Choice.”); 
+     flag=false; 
+     system.exit(0); 
+     } 
+     } 
+     } 
+    } 
+  </pre>
+
+  <h3>Termwork 4</h3>
+  <pre>
+    import java.io.*; 
+    import java.util.Scanner; 
+    public class tw4_a { 
+     public static void main(String[] args) { 
+     Scanner in=new Scanner(System.in); 
+     try{ 
+     File file = new File("C:\\Users\\SAM\\OneDrive\\Desktop\\demo.txt"); 
+     //Tests whether the application can read the file 
+     System.out.println(file.canRead()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.canWrite()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.createNewFile()); 
+     //Tests whether the file or directory exists. 
+     System.out.println(file.exists()); 
+     //Returns the absolute pathname string. 
+     System.out.println(file.getAbsolutePath()); 
+     //Tests whether the file is a directory or not. 
+     System.out.println(file.isDirectory()); 
+     //Tests whether the file is a hidden file or not. 
+     System.out.println(file.isHidden()); 
+     System.out.print("Enter text to write in the file: "); 
+     String line = in.nextLine(); 
+     FileOutputStream fout = new FileOutputStream(file); 
+     fout.write(line.getBytes()); 
+     
+     //Tests whether the application can read the file 
+     System.out.println(file.canRead()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.canWrite()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.createNewFile()); 
+     //Tests whether the file or directory exists. 
+     System.out.println(file.exists()); 
+     //Returns the absolute pathname string. 
+     System.out.println(file.getAbsolutePath()); 
+     //Tests whether the file is a directory or not. 
+     System.out.println(file.isDirectory()); 
+     //Tests whether the file is a hidden file or not. 
+     System.out.println(file.isHidden()); 
+     fout.close(); 
+     in.close(); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     } 
+    } 
+  </pre>
+
+  <h3>Termwork 4.2</h3>
+  <pre>
+    import java.io.*; 
+    import static java.lang.System.exit; 
+    import java.util.Scanner; 
+    public class tw4b { 
+     public static void main(String[] args) 
+     { 
+     Scanner s = new Scanner(System.in); 
+     while(true) 
+     { 
+     System.out.println("1. Print characters on the on the console-one character at a time\n2. Print the entire 
+    file\n3. Print contents to another file\n4. exit\n"); 
+     System.out.print("\nEnter your Choice : "); 
+     int choice = s.nextInt(); 
+     File fobj = new File("C:\\Users\\ \\Desktop\\demo.txt"); 
+     switch(choice) 
+     { 
+     case 1: System.out.println("Printing the file content one character at a time\n"); 
+     try 
+     { 
+     Reader r = new FileReader(fobj); 
+     int data = r.read(); 
+     while(data != -1) 
+     { 
+     System.out.println((char)data); 
+     data = r.read(); 
+     } 
+     System.out.println(“”); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 2: System.out.println("Printing the entire file :\n"); 
+     try 
+     { 
+     Reader r = new FileReader(fobj); 
+     char []array = new char[128]; 
+     r.read(array); 
+     System.out.println(array); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 3: System.out.println("Printing the contents to another file : \n"); 
+     try 
+     { 
+     File fobj1 = new File("C:\\Users\\ \\Desktop\\demo1.txt"); 
+     Reader r = new FileReader(fobj); 
+     Writer w = new FileWriter(fobj1); 
+     char []a = new char[258]; 
+     r.read(a); 
+     w.write(a); 
+     w.flush(); 
+     System.out.println("Copied contents to another file."); 
+     } 
+     catch(Exception e) 
+     { 
+     System.out.println(e); 
+     } 
+     break; 
+     case 4: System.exit(0); 
+     default: System.out.println(“Invalid choice.”); 
+     } 
+     } 
+     } 
+    }
+  </pre>
+
+  <h3>Termwork 4.3</h3>
+  <pre>
+    import java.util.Scanner; 
+    import java,io.*; 
+    public class tw4c { 
+     public static void main(String[] args) { 
+     Scanner inp = new Scanner(System.in); 
+     File f; 
+     String src_file = " C:\\Users\\ \\Desktop\\input.txt"; 
+     String dest_file = new String(); 
+     String fname = new String(); 
+     // Copying content 
+     System.out.print("Enter destination file name : "); 
+     fname = inp.next(); 
+     dest_file = " C:\\Users\\ \\Desktop\\" + fname; 
+     f = new File(dest_file); 
+     try{ 
+     if(f.createNewFile()) 
+     System.out.println("Destination file created !!"); 
+     else{ 
+     System.out.println("File with name " + fname + " already exists!!"); 
+     } 
+     System.out.println("Copying content to destination"); 
+     InputStream in = new FileInputStream(src_file); 
+     FileOutputStream op = new FileOutputStream(dest_file); 
+     int choice = in.read(); 
+     while (choice != -1) { 
+     op.write((char) choice); 
+     choice = in.read(); 
+     } 
+     } catch (Exception e) { 
+     System.out.println(e); 
+     } 
+     System.out.println("\n"); 
+     // File properties 
+     File sobj = new File(src_file); 
+     File dobj = new File(dest_file); 
+     System.out.println("\nProperties of source file \n"); 
+     System.out.println("File name : " + sobj.getName()); 
+     System.out.println("Is writable ??" + sobj.canWrite()); 
+     System.out.println("Is readable ??" + sobj.canRead()); 
+     System.out.println("No of bytes : " + sobj.getAbsolutePath()); 
+     System.out.println("Size of file is : " + sobj.length()); 
+     System.out.println("\nProperties of destination file \n"); 
+     System.out.println("File name : " + dobj.getName()); 
+     System.out.println("Is writable ??" + dobj.canWrite()); 
+     System.out.println("Is readable ??" + dobj.canRead()); 
+     System.out.println("No of bytes : " + dobj.getAbsolutePath()); 
+     System.out.println("Size of file is : " + dobj.length()); 
+     } 
+    }
+  </pre>
+
+  <h3>Termwork 4.4</h3>
+  <pre>
+    import java.io.*; 
+    public class tw4d { 
+     public static void main(String[] a){ 
+     try{ 
+     File file = new File("C:\\Users\\ \\Desktop\\demo.txt "); 
+     //Tests whether the application can read the file 
+     System.out.println(file.canRead()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.canWrite()); 
+     //Tests whether the application can modify the file 
+     System.out.println(file.createNewFile()); 
+     //Deletes the file or directory 
+     //System.out.println(file.delete()); 
+     //Tests whether the file or directory exists. 
+     System.out.println(file.exists()); 
+     //Returns the absolute pathname string. 
+     System.out.println(file.getAbsolutePath()); 
+     //Tests whether the file is a directory or not. 
+     System.out.println(file.isDirectory()); 
+     //Tests whether the file is a hidden file or not. 
+     System.out.println(file.isHidden()); 
+     //Returns an array of strings naming the 
+     //files and directories in the directory. 
+     } 
+     catch(Exception ex) 
+     { 
+     System.out.println(ex); 
+     } 
+     } 
+    }     
+  </pre>
+
+  <h3>Termwork 5</h3>
+  <pre>
+    Main class: 
+    package TW5; 
+    import java.util.Scanner; 
+    public class tw5a { 
+     public static void main(String[] args) 
+     { 
+     Scanner s= new Scanner(System.in); 
+     System.out.println("Enter the number :"); 
+     int b = s.nextInt(); 
+     System.out.println("Enter the elements into the array"); 
+     int a[] = new int[b]; 
+     for(int i=0;i&lt;b;i++) 
+     a[i] = s.nextInt(); 
+     ascending_thread at = new ascending_thread(a); 
+     at.start(); 
+     descending_thread dt = new descending_thread(a); 
+     dt.start(); 
+     try{ 
+     Thread.sleep(1000); 
+     } 
+     catch(Exception e){} 
+     System.out.println("”); 
+     System.out.println("main thread exiting......."); 
+     } 
+    } 
+    Ascending Thread: 
+    package TW5; 
+    import java.lang.Thread; 
+    public class ascending_thread extends Thread{ 
+     private int a[]; 
+     ascending_thread(int n[]) 
+     { 
+     a = new int[n.length]; 
+     for(int i=0;i&lt;a.length;i++) 
+     { 
+     a[i] = n[i]; 
+     } 
+     } 
+     public void run() 
+     { 
+     int temp; 
+     for(int i=0;i&lt;a.length-1;i++) 
+     for(int j=0;j&lt;a.length-i-1;j++) 
+     if(a[j]>a[j+1]){ 
+     temp=a[j]; 
+     a[j]=a[j+1]; 
+     a[j+1]=temp; 
+     } 
+     System.out.println("Ascending order: "); 
+     for(int i=0;i&lt;a.length;i++) 
+     System.out.print(a[i]+" "); 
+     System.out.println("Ascending order child thread exiting......."); 
+     } 
+    } 
+    Descending Thread: 
+    package TW5; 
+    public class descending_thread extends Thread { 
+     private int a[]; 
+     descending_thread(int n[]) 
+     { 
+     a = new int[n.length]; 
+     for(int i=0;i&lt;a.length;i++) 
+     { 
+     a[i] = n[i]; 
+     } 
+     } 
+     public void run() 
+     { 
+     int temp; 
+     for(int i=0;i&lt;a.length-1;i++) 
+     for(int j=0;j&lt;a.length-i-1;j++){ 
+     if(a[j]&lt;a[j+1]){ 
+     temp=a[j]; 
+     a[j]=a[j+1]; 
+     a[j+1]=temp; 
+     } 
+     } 
+     System.out.println("Descending order: "); 
+     for(int i=0;i&lt;a.length;i++) 
+     System.out.print(a[i]+" "); 
+     System.out.println("Descending child thread exiting......."); 
+     } 
+    }     
+  </pre>
+
+  <h3>Termwork 5.2</h3>
+  <pre>
+    Main class: 
+  package TW5; 
+import java.util.Scanner; 
+public class tw5 { 
+ public static void main(String[] args) 
+ { 
+ Scanner s = new Scanner(System.in); 
+ System.out.println("How many numbers in fibonacci series :"); 
+ int fibN = s.nextInt(); 
+ System.out.println("How many numbers in Reverse series :"); 
+ int RevN = s.nextInt(); 
+ Fibonacci_thread ft = new Fibonacci_thread(fibN); 
+ ft.start(); 
+ Reverse_Series rs = new Reverse_Series(RevN); 
+ rs.start(); 
+ try{ 
+ Thread.sleep(1000); 
+ } 
+ catch(Exception e){} 
+ System.out.println(“”); 
+ System.out.println("Exiting main Thread......"); 
+ } 
+} 
+Fibonacci Thread: 
+package TW5; 
+import java.lang.Thread; 
+public class Fibonacci_thread extends Thread 
+{ 
+ private int N;//number of digits in fibs series 
+ Fibonacci_thread(int n) 
+ { 
+ N = n; 
+ } 
+ public void run() 
+ { 
+ int f1 = 0; 
+ int f2 = 1; 
+ int f3; 
+ System.out.println("Fibonnaci Series"); 
+ System.out.print(f1 + " " +f2+ " "); 
+ for(int i=2;i&lt;N;i++) 
+ { 
+ f3 = f1+f2; 
+ System.out.print(f3+" "); 
+ f1 = f2; 
+ f2 = f3; 
+ } 
+ System.out.println(""); 
+ System.out.println("Fib series child thread exiting......."); 
+ } 
+} 
+Reverse Thread: 
+package TW5; 
+import java.lang.Thread; 
+public class Reverse_Series extends Thread { 
+ private int N; 
+ Reverse_Series(int n) 
+ { 
+ N = n; 
+ } 
+ public void run() 
+ { 
+ System.out.println("Reverse Series: "); 
+ for(int i=N;i>0;i--) 
+ { 
+ System.out.print(i + " "); 
+ } 
+ System.out.println(""); 
+ System.out.println("Reverse series child thread exiting......."); 
+ } 
+} 
+  </pre>
+
+  <h3>Termwork 6</h3>
+  <pre>
+    package tw6; 
+class Stack { 
+ protected int arr[]; 
+ protected int top; 
+ Stack(int size) { // Dynamically allocate size and intialize top 
+ arr = new int[size]; 
+ top = -1; 
+ System.out.println("Stack of size " + arr.length + " has been created"); 
+ } 
+ synchronized void push(String name, int element) { 
+ if(top < arr.length) { 
+ arr[++top] = element; 
+ System.out.println(name + " pushed->" + element); 
+ } 
+ else { 
+ System.out.println("Stack Full"); 
+ } 
+ try { 
+ Thread.sleep(1000); 
+ } catch (Exception e) { 
+ System.out.println(e); 
+ } 
+ } 
+ synchronized void pop(String name) { 
+ if(top == -1) { 
+ System.out.println("Stack Empty"); 
+ } 
+ else { 
+ System.out.println(name + " popped-> " + arr[top--]); 
+ } 
+ try { 
+ Thread.sleep(1000); 
+ } catch (InterruptedException e) { 
+ System.out.println(e); 
+ } 
+ } 
+} 
+class PushThread extends Thread { 
+ Stack s; 
+ String name; 
+ int element; 
+ PushThread(int element, String name, Stack s) { 
+ this.element = element; 
+ this.name = name; 
+ this.s = s; 
+ } 
+ @Override 
+ public void run() { 
+ s.push(name, element); 
+ } 
+} 
+class PopThread extends Thread { 
+ Stack s; 
+ String name; 
+ PopThread(String name, Stack s) { 
+ this.name = name; 
+ this.s = s; 
+ } 
+ @Override 
+ public void run() { 
+ s.pop(name); 
+ } 
+} 
+public class tw6a { 
+ public static void main(String args[]) { 
+ Stack s = new Stack(4); 
+ // Create child thread 
+ PushThread pu1 = new PushThread(10, "Push Thread 1", s); 
+ PushThread pu2 = new PushThread(15, "Push Thread 2", s); 
+ PushThread pu3 = new PushThread(20, "Push Thread 3", s); 
+ PushThread pu4 = new PushThread(25, "Push Thread 4", s); 
+ PopThread po1 = new PopThread("Pop Thread 1", s); 
+ PopThread po2 = new PopThread("Pop Thread 2", s); 
+ PopThread po3 = new PopThread("Pop Thread 3", s); 
+ // Start push child thread 
+ pu1.start(); 
+ pu2.start(); 
+ pu3.start(); 
+ pu4.start(); 
+ // Start pop child thread 
+ po1.start(); 
+ po2.start(); 
+ po3.start(); 
+ } 
+} 
+  </pre>
+
+  <h3>Termwork 6.2</h3>
+  <pre>
+    package tw6; 
+class Account{ 
+ public int balance,accNo; 
+ void displayBalance(){ 
+ System.out.println("Account number: "+accNo+" Balance in account: "+balance); 
+ } 
+ synchronized void deposit(int amount){ 
+ balance+=amount; 
+ System.out.println(amount+" is deposited in the account."); 
+ displayBalance(); 
+ } 
+ synchronized void withdraw(int amount){ 
+ balance-=amount; 
+ System.out.println(amount+" withdrawed from the account"); 
+ displayBalance(); 
+ } 
+} 
+abstract class TransactionDeposit implements Runnable{ 
+ int amount; 
+ Account accN; 
+ TransactionDeposit(Account acc,int amount){ 
+ accN=acc; 
+ this.amount=amount; 
+ new Thread(this).start(); 
+ } 
+ public void run(){ 
+ accN.deposit(amount); 
+ } 
+} 
+abstract class TransactionWithdraw implements Runnable{ 
+ int amount; 
+ Account accW; 
+ TransactionWithdraw(Account acc,int amount){ 
+ accW=acc; 
+ this.amount=amount; 
+ new Thread(this).start(); 
+ } 
+ public void run(){ 
+ accW.withdraw(amount); 
+ } 
+} 
+public class tw6b { 
+ public static void main(String args[]){ 
+ Account A=new Account(); 
+ A.balance=10000; 
+ A.accNo=123; 
+ Account B=new Account(); 
+ B.balance=10000; 
+ B.accNo=124; 
+ TransactionDeposit t1; 
+ TransactionWithdraw t2; 
+ t1=new TransactionDeposit(A,700) {}; 
+ t2=new TransactionWithdraw(B,900) {}; 
+ } 
+} 
+  </pre>
+
+  <h3>Termwork 7</h3>
+  <pre>
+    import java.sql.*; 
+public class tw7a{ 
+ public static final String DBURL = "jdbc:mysql://localhost:3306/Company"; 
+ public static final String DBUSER = "root"; 
+ public static final String DBPASS = ""; 
+ public static void main(String args[]){ 
+ try{ 
+ Class.forName("com.mysql.jdbc.Driver"); 
+ //Create the connection object 
+ Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS); 
+ //Insert the record 
+ String sql = "INSERT INTO employee (emp_id, empname, email, city) VALUES (?, ?, ?, ?)"; 
+ PreparedStatement statement = con.prepareStatement(sql); 
+ statement.setInt(1, 100); 
+ statement.setString(2, "Prashant"); 
+ statement.setString(3, "prasant@saxena.com"); 
+ statement.setString(4, "Pune"); 
+ int rowsInserted = statement.executeUpdate(); 
+ if (rowsInserted > 0) 
+ System.out.println("A new employee was inserted successfully!\n"); 
+ // Display the record 
+ String sql1 = "SELECT * FROM employee"; 
+ Statement stmt = con.createStatement(); 
+ ResultSet result = stmt.executeQuery(sql1); 
+ while (result.next()) { 
+ System.out.println (result.getInt(1)+" "+ 
+ result.getString(2)+" "+ 
+ result.getString(3)+" "+ 
+ result.getString(4)); 
+ } 
+ //Update the record 
+ String sql2 = "Update employee set email = ? where empname = ?"; 
+ PreparedStatement pstmt = con.prepareStatement(sql2); 
+ pstmt.setString(1, "prashant@gmail.com"); 
+ pstmt.setString(2, "Prashant"); 
+ int rowUpdate = pstmt.executeUpdate(); 
+ if (rowUpdate > 0) 
+ { 
+ System.out.println("\nRecord updated successfully!!\n"); 
+ } 
+ //Delete the record 
+ String sql3 = "DELETE FROM employee WHERE empname=?"; 
+ PreparedStatement statement1 = con.prepareStatement(sql3); 
+ statement1.setString(1, "Prashant"); 
+ int rowsDeleted = statement1.executeUpdate(); 
+ if (rowsDeleted > 0) 
+ { 
+ System.out.println("An Employee was deleted successfully!\n"); 
+ } 
+ } 
+ catch(Exception e) 
+ { 
+ e.printStackTrace(); 
+ } 
+ } 
+} 
+  </pre>
+
+  <h3>Termwork 7.2</h3>
+  <pre>
+    import java.sql.*; 
+    public class tw7a{ 
+     public static final String DBURL = "jdbc:mysql://localhost:3306/Company"; 
+     public static final String DBUSER = "root"; 
+     public static final String DBPASS = ""; 
+     public static void main(String args[]){ 
+     try{ 
+     Class.forName("com.mysql.jdbc.Driver"); 
+     //Create the connection object 
+     Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS); 
+     //Insert the record 
+     String sql = "INSERT INTO employee (emp_id, empname, email, city) VALUES (?, ?, ?, ?)"; 
+     PreparedStatement statement = con.prepareStatement(sql); 
+     statement.setInt(1, 100); 
+     statement.setString(2, "Prashant"); 
+     statement.setString(3, "prasant@saxena.com"); 
+     statement.setString(4, "Pune"); 
+     int rowsInserted = statement.executeUpdate(); 
+     if (rowsInserted > 0) 
+     System.out.println("A new employee was inserted successfully!\n"); 
+     // Display the record 
+     String sql1 = "SELECT * FROM employee"; 
+     Statement stmt = con.createStatement(); 
+     ResultSet result = stmt.executeQuery(sql1); 
+     while (result.next()) { 
+     System.out.println (result.getInt(1)+" "+ 
+     result.getString(2)+" "+ 
+     result.getString(3)+" "+ 
+     result.getString(4)); 
+     } 
+     //Update the record 
+     String sql2 = "Update employee set email = ? where empname = ?"; 
+     PreparedStatement pstmt = con.prepareStatement(sql2); 
+     pstmt.setString(1, "prashant@gmail.com"); 
+     pstmt.setString(2, "Prashant"); 
+     int rowUpdate = pstmt.executeUpdate(); 
+     if (rowUpdate > 0) 
+     { 
+     System.out.println("\nRecord updated successfully!!\n"); 
+     } 
+     //Delete the record 
+     String sql3 = "DELETE FROM employee WHERE empname=?"; 
+     PreparedStatement statement1 = con.prepareStatement(sql3); 
+     statement1.setString(1, "Prashant"); 
+     int rowsDeleted = statement1.executeUpdate(); 
+     if (rowsDeleted > 0) 
+     { 
+     System.out.println("An Employee was deleted successfully!\n"); 
+     } 
+     } 
+     catch(Exception e) 
+     { 
+     e.printStackTrace(); 
+     } 
+     } 
+    }     
+  </pre>
+
+  <h3>Termwork 7.3</h3>
+  <pre>
+    import java.sql.*; 
+public class tw7c { 
+ public static void main(String []args){ 
+ Connection con; 
+ try{ 
+ Class.forName("com.mysql.jdbc.Driver"); 
+ con = DriverManager.getConnection("jdbc:mysql://localhost/practice","root",""); 
+ 
+ Statement st = (Statement)con.createStatement(); 
+ String sql1="create table if not exists emp(emp_id integer,empname varchar(15),email 
+varchar(15),city varchar(10),dept_id integer)"; 
+ st.executeUpdate(sql1); 
+ sql1="create table if not exists dept(dept_id integer,department varchar(10))"; 
+ st.executeUpdate(sql1); 
+ sql1 = "INSERT INTO emp VALUES (100, 'Zara', 'zara@gmail.com', 'Mumbai',1)"; 
+ st.executeUpdate(sql1); 
+ sql1 = "INSERT INTO emp VALUES (101, 'Raj', 'raj@gmail.com','Pune', 2)"; 
+ st.executeUpdate(sql1); 
+ 
+ sql1 = "INSERT INTO dept VALUES (1,'Account')"; 
+ st.executeUpdate(sql1); 
+ sql1 = "INSERT INTO dept VALUES (2,'Sales')"; 
+ st.executeUpdate(sql1); 
+ 
+ String sql = "select empname, city, department from emp e inner join dept d on e.dept_id = 
+d.dept_id"; 
+ Statement stmt = con.createStatement(); 
+ ResultSet result = stmt.executeQuery(sql); 
+ System.out.println("EmpName City Department"); 
+ System.out.println("**===========**==========**"); 
+ while (result.next()) 
+ { 
+ System.out.println ( 
+ result.getString(1)+" "+ 
+ result.getString(2)+" "+ 
+ result.getString(3)); 
+ } 
+ System.out.println("**===========**==========**\n"); 
+ }catch(Exception e){ 
+ System.out.println(e); 
+ } 
+ } 
+} 
+  </pre>
+
+  <h3>Termwork 7.4</h3>
+  <pre>
+    import java.sql.*; 
+public class tw7d { 
+ public static void main(String []args) throws ClassNotFoundException, SQLException{ 
+ Connection conn = null; 
+ PreparedStatement pst; 
+ Statement st; 
+ Savepoint savepoint1=null; 
+ try { 
+ Class.forName("com.mysql.cj.jdbc.Driver"); 
+ conn = DriverManager.getConnection("jdbc:mysql://localhost/practice", "root", ""); 
+ st = conn.createStatement(); 
+ conn.setAutoCommit(false); 
+ String sql="create table if not exists registration(id integer PRIMARY KEY,name varchar(15),age 
+integer)"; 
+ st.executeUpdate(sql); 
+ // Insert Records 
+ System.out.println("Inserting records into the table..."); 
+ sql = "INSERT INTO REGISTRATION VALUES (100, 'Harry', 18)"; 
+ st.executeUpdate(sql); 
+ sql = "INSERT INTO REGISTRATION VALUES (101, 'Vikram', 25)"; 
+ st.executeUpdate(sql); 
+ sql = "INSERT INTO REGISTRATION VALUES (102, 'Toby', 30)"; 
+ st.executeUpdate(sql); 
+ sql = "INSERT INTO REGISTRATION VALUES(103, 'Sumeet', 28)"; 
+ st.executeUpdate(sql); 
+ System.out.println("Inserted records into the table..."); 
+ //set a Savepoint 
+ savepoint1 = conn.setSavepoint("Savepoint1"); 
+ String SQL = "INSERT INTO REGISTRATION " + "VALUES (106, 'Josh', 20)"; 
+ st.executeUpdate(SQL); 
+ //Submit a malformed SQL statement that breaks 
+ SQL = "INSERTED IN REGISTRATION " + "VALUES (107, 22, 'Simon')"; 
+ st.executeUpdate(SQL); 
+ // If there is no error. 
+ conn.commit(); 
+ } catch (SQLException se) { 
+ try { 
+ if (savepoint1 == null) { 
+ conn.rollback(); 
+ System.out.println("JDBC Transaction rolled back successfully"); 
+ } else { 
+ conn.rollback(savepoint1); 
+ conn.commit(); 
+ } 
+ } catch (SQLException e1) { 
+ System.out.println("SQLException in rollback" + e1.getMessage()); 
+ } 
+ } 
+ } 
+} 
+  </pre>
+</body>
+
+</html>
